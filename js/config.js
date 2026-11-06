@@ -4,9 +4,9 @@ export const CONFIG = {
   role: 'Game Developer',
   email: 'atharvakashiv505@gmail.com',
   // Used when /api/projects is unavailable (no VERCEL_TOKEN): repos whose homepage is a *.vercel.app site are shown.
-  githubUser: '', // TODO: your GitHub username
+  githubUser: 'why-atharv',
   socials: [
-    { label: 'GitHub', url: '', icon: 'gh' },      // TODO
+    { label: 'GitHub', url: 'https://github.com/why-atharv', icon: 'gh' },
     { label: 'LinkedIn', url: '', icon: 'in' },    // TODO
     { label: 'itch.io', url: '', icon: 'itch' },   // TODO
     { label: 'Resume', url: '', icon: 'cv' },      // TODO: link to a PDF

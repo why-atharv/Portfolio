@@ -238,8 +238,8 @@ button { font: inherit; color: inherit; }
 .palm--2 { animation-duration: 9s; animation-delay: -2s; } .palm--3 { animation-duration: 8s; animation-delay: -4s; } .palm--4 { animation-duration: 10s; }
 @keyframes sway { from { transform: rotate(-1.6deg); } to { transform: rotate(1.8deg); } }
 
-.hero__char { position: absolute; right: clamp(0px, 6vw, 120px); bottom: 0; z-index: -3; margin: 0; height: min(88svh, 900px); aspect-ratio: 664 / 1100; }
-.hero__char img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; filter: drop-shadow(0 30px 40px rgba(0,0,0,.5)); -webkit-mask: linear-gradient(180deg, #000 82%, transparent 99%); mask: linear-gradient(180deg, #000 82%, transparent 99%); }
+.hero__char { position: absolute; right: clamp(16px, 7vw, 140px); bottom: 10svh; z-index: -3; margin: 0; height: min(78svh, 840px); aspect-ratio: 9 / 16; transform: rotate(3deg); }
+.hero__char img { width: 100%; height: 100%; object-fit: cover; border: 6px solid #000; box-shadow: 14px 14px 0 var(--pink), 0 30px 80px rgba(0,0,0,.55); }
 .hero__char-glow { position: absolute; inset: 15% -10% 0; z-index: -1; background: radial-gradient(closest-side, rgba(255,45,149,.55), transparent); filter: blur(20px); }
 .hero__tag { position: absolute; left: -8%; top: 22%; display: grid; padding: 10px 16px; background: #000; transform: rotate(-4deg); box-shadow: 6px 6px 0 var(--pink); }
 .hero__tag b { font: 400 26px/1 var(--f-display); letter-spacing: .04em; }
@@ -282,7 +282,7 @@ button { font: inherit; color: inherit; }
 .profile__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
 .card-art { position: relative; margin: 0; background: linear-gradient(160deg, #ffb347, #ff2d95 55%, #4a1a8a); border: 8px solid #000; box-shadow: 14px 14px 0 rgba(0,0,0,.6), 0 0 0 2px rgba(255,255,255,.15); transform-style: preserve-3d; overflow: hidden; }
 .card-art::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, rgba(255,255,255,.06) 0 2px, transparent 2px 12px); }
-.card-art img { position: relative; width: 100%; height: auto; aspect-ratio: 987/1100; object-fit: cover; object-position: top; }
+.card-art img { position: relative; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 22%; }
 .card-art figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px; display: grid; background: linear-gradient(transparent, rgba(0,0,0,.85)); }
 .card-art figcaption strong { font: 400 clamp(26px, 3vw, 40px)/1 var(--f-display); }
 .card-art__label { font: 700 11px/1 var(--f-hud); letter-spacing: .3em; color: var(--sun); }
@@ -430,7 +430,7 @@ body.cheat-neon { --grad: linear-gradient(120deg, #5cff8f, #22e3d3, #3aa0ff, #b0
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1100px) {
   .mission, .mission:nth-child(6n+1), .mission:nth-child(6n+2) { grid-column: span 6; min-height: 360px; }
-  .hero__char { right: -4vw; height: min(80svh, 760px); opacity: .95; }
+  .hero__char { right: 3vw; height: min(70svh, 700px); }
   .hero__content { max-width: 680px; }
 }
 @media (max-width: 900px) {
@@ -445,7 +445,7 @@ body.cheat-neon { --grad: linear-gradient(120deg, #5cff8f, #22e3d3, #3aa0ff, #b0
   .brief__art { min-height: 200px; max-height: 34svh; }
   .radar__disc { width: 96px; height: 96px; }
   .radar__bars { width: 96px; }
-  .hero__char { right: -10vw; height: 62svh; }
+  .hero__char { right: 4vw; bottom: 7svh; height: 52svh; }
   .hero__tag { left: 4%; top: -3%; }
   .hero__content { max-width: 62%; padding-bottom: 38svh; align-self: start; padding-top: calc(var(--hud-h) + 28px); }
   .hero__scroll { display: none; }
@@ -460,8 +460,8 @@ body.cheat-neon { --grad: linear-gradient(120deg, #5cff8f, #22e3d3, #3aa0ff, #b0
   .hud__cash { font-size: 18px; }
   .hud__stars i { width: 12px; height: 12px; }
   .hero__title { font-size: clamp(64px, 22vw, 120px); }
-  .hero__char { left: 0; right: 0; margin-inline: auto; height: 50svh; }
-  .hero__content { max-width: none; padding-bottom: 46svh; }
+  .hero__char { left: 0; right: 0; margin-inline: auto; bottom: 7svh; height: 42svh; }
+  .hero__content { max-width: none; padding-bottom: 52svh; }
   .hero__tag { left: auto; right: -14%; top: 8%; }
   .hero__tag b { font-size: 20px; }
   .hero__ctas .btn { flex: 1 1 auto; justify-content: center; }
@@ -483,7 +483,7 @@ body.cheat-neon { --grad: linear-gradient(120deg, #5cff8f, #22e3d3, #3aa0ff, #b0
   .btn { padding: 0 20px; letter-spacing: .12em; }
 }
 @media (max-height: 520px) and (orientation: landscape) {
-  .hero__char { height: 92svh; left: auto; right: 0; margin: 0; }
+  .hero__char { height: 76svh; bottom: 8svh; left: auto; right: 4vw; margin: 0; }
   .hero__content { padding-bottom: 60px; max-width: 60%; }
   .hero__title { font-size: clamp(48px, 10vw, 100px); }
   .radar { display: none; }
