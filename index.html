@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Atharv Kashiv — Game Developer</title>
+  <meta name="description" content="Atharv Kashiv — game developer. Open-world portfolio: live missions pulled from Vercel, a weapon wheel of skills and a story mode.">
+  <meta name="theme-color" content="#0d0a1c">
+  <meta property="og:title" content="Atharv Kashiv — Game Developer">
+  <meta property="og:description" content="Step into the open world. Every mission is a live project.">
+  <meta property="og:image" content="assets/hero-character.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffb347'/%3E%3Cstop offset='.5' stop-color='%23ff2d95'/%3E%3Cstop offset='1' stop-color='%236c2bd9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='44' font-family='Impact,sans-serif' font-size='32' text-anchor='middle' fill='%23fff'%3EAK%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero-character.webp">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><i></i></div>
+
+  <!-- ============ LOADER ============ -->
+  <div id="loader" class="loader" role="dialog" aria-label="Loading">
+    <div class="loader__presents">
+      <span class="loader__name">ATHARV KASHIV</span>
+      <span class="loader__sub">PRESENTS</span>
+    </div>
+    <div class="loader__main">
+      <div class="logo-badge" aria-hidden="true"><span>AK</span></div>
+      <p class="loader__title">GAME DEVELOPER <em>open world edition</em></p>
+      <div class="loader__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+      <p class="loader__tip" aria-live="polite"></p>
+      <button class="btn btn--primary loader__start" id="startBtn" disabled><span>Loading…</span></button>
+    </div>
+    <div class="loader__corner">© ATHARV KASHIV · NOT AFFILIATED WITH ANY GAME STUDIO</div>
+  </div>
+
+  <!-- ============ HUD ============ -->
+  <header class="hud" id="hud">
+    <a class="hud__logo" href="#hero" aria-label="Back to top"><span>AK</span></a>
+    <nav class="hud__nav" aria-label="Sections">
+      <a href="#profile">Profile</a>
+      <a href="#missions">Missions</a>
+      <a href="#arsenal">Arsenal</a>
+      <a href="#story">Story</a>
+      <a href="#contact">Phone</a>
+    </nav>
+    <div class="hud__right">
+      <div class="hud__stats" aria-hidden="true">
+        <div class="hud__clock" id="clock">00:00</div>
+        <div class="hud__cash">$<span id="cash">0</span></div>
+        <div class="hud__stars" id="stars"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <button class="hud__sound" id="soundBtn" aria-pressed="false" aria-label="Toggle sound effects">SFX <b>OFF</b></button>
+      <button class="hud__burger" id="menuBtn" aria-expanded="false" aria-controls="pause" aria-label="Open menu"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <!-- pause menu (mobile nav) -->
+  <div class="pause" id="pause" aria-hidden="true">
+    <p class="pause__label">PAUSED</p>
+    <nav aria-label="Menu">
+      <a href="#hero"><small>00</small>Map</a>
+      <a href="#profile"><small>01</small>Profile</a>
+      <a href="#missions"><small>02</small>Missions</a>
+      <a href="#arsenal"><small>03</small>Arsenal</a>
+      <a href="#story"><small>04</small>Story</a>
+      <a href="#contact"><small>05</small>Phone</a>
+    </nav>
+    <p class="pause__hint">TAP TO RESUME</p>
+  </div>
+
+  <!-- radar -->
+  <nav class="radar" id="radar" aria-label="Radar fast travel">
+    <div class="radar__disc">
+      <div class="radar__sweep"></div>
+      <div class="radar__grid"></div>
+      <span class="radar__you" aria-hidden="true"></span>
+    </div>
+    <div class="radar__bars" aria-hidden="true"><i class="hp"><b></b></i><i class="ar"><b></b></i></div>
+  </nav>
+
+  <!-- mission passed toast -->
+  <div class="toast" id="toast" aria-live="polite">
+    <strong class="toast__title">MISSION PASSED</strong>
+    <span class="toast__sub">RESPECT +</span>
+  </div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero" data-blip="Map">
+      <div class="hero__sky" aria-hidden="true"></div>
+      <div class="hero__stars" aria-hidden="true"></div>
+      <div class="hero__sun" aria-hidden="true"></div>
+      <svg class="hero__city hero__city--far" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1600 300"></svg>
+      <svg class="hero__city hero__city--near" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1600 300"></svg>
+      <div class="hero__water" aria-hidden="true"></div>
+      <svg class="hero__palms" aria-hidden="true" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+        <defs>
+          <symbol id="palm" viewBox="0 0 300 600">
+            <path d="M150 600 C150 480 135 330 170 150" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round"/>
+            <g fill="currentColor">
+              <path d="M170 150 C120 110 60 120 0 190 C70 140 120 145 170 160Z"/>
+              <path d="M170 150 C130 80 70 60 20 70 C90 80 130 110 168 158Z"/>
+              <path d="M170 150 C170 80 150 40 120 0 C175 40 185 100 175 152Z"/>
+              <path d="M170 150 C220 90 270 80 300 100 C250 105 210 125 172 158Z"/>
+              <path d="M170 150 C230 140 280 180 300 250 C255 195 215 170 172 162Z"/>
+              <path d="M170 150 C150 190 140 240 150 300 C125 240 135 190 166 155Z"/>
+              <path d="M170 150 C200 190 215 230 210 280 C230 225 210 180 174 155Z"/>
+            </g>
+          </symbol>
+        </defs>
+        <use href="#palm" class="palm palm--1" x="-60" y="240" width="380" height="760"/>
+        <use href="#palm" class="palm palm--2" x="150" y="420" width="240" height="480"/>
+        <use href="#palm" class="palm palm--3" x="1330" y="200" width="420" height="840"/>
+        <use href="#palm" class="palm palm--4" x="1240" y="470" width="200" height="400"/>
+      </svg>
+
+      <figure class="hero__char">
+        <div class="hero__char-glow" aria-hidden="true"></div>
+        <img src="assets/hero-character.webp" alt="Illustrated portrait of Atharv Kashiv taking a mirror selfie" width="664" height="1100" fetchpriority="high">
+        <figcaption class="hero__tag"><b>ATHARV</b><span>PROTAGONIST</span></figcaption>
+      </figure>
+
+      <div class="hero__content">
+        <p class="kicker"><span class="dot"></span> NOW PLAYING · GAME DEVELOPER</p>
+        <h1 class="hero__title" aria-label="Atharv Kashiv">
+          <span class="line" data-split>ATHARV</span>
+          <span class="line line--outline" data-split>KASHIV</span>
+        </h1>
+        <p class="hero__lead">I build worlds people don't want to leave — gameplay systems, tight game feel and the tools behind them.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#missions" data-magnetic><span>Start mission</span><kbd>↵</kbd></a>
+          <a class="btn btn--ghost" href="#contact" data-magnetic><span>Call me</span></a>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true"><span>SCROLL</span><i></i></div>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>BREAKING: LOCAL DEV SHIPS ANOTHER BUILD</span><span>★</span>
+          <span>WITNESSES REPORT "UNREASONABLY SMOOTH FRAMERATE"</span><span>★</span>
+          <span>BUG POPULATION AT RECORD LOW</span><span>★</span>
+          <span>RECRUITERS ADVISED: APPROACH WITH JOB OFFERS</span><span>★</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROFILE ============ -->
+    <section id="profile" class="section profile" data-blip="Profile">
+      <header class="section__head">
+        <p class="section__num">01</p>
+        <h2 class="section__title" data-split>Character Profile</h2>
+      </header>
+      <div class="profile__grid">
+        <figure class="card-art profile__art" data-tilt>
+          <img src="assets/profile-character.webp" alt="Illustrated headshot of Atharv Kashiv" width="987" height="1100" loading="lazy">
+          <figcaption>
+            <span class="card-art__label">PLAYER 1</span>
+            <strong>ATHARV KASHIV</strong>
+          </figcaption>
+        </figure>
+        <div class="profile__info">
+          <dl class="profile__meta">
+            <div><dt>Class</dt><dd>Game Developer</dd></div>
+            <div><dt>Status</dt><dd class="ok">Open to work</dd></div>
+            <div><dt>Weapon</dt><dd>Code + Coffee</dd></div>
+            <div><dt>Missions</dt><dd id="missionCount">—</dd></div>
+          </dl>
+          <p class="profile__bio">Gameplay-first developer who obsesses over the half-second between pressing a button and feeling something. I prototype fast, polish hard and ship — from jam games to full systems, plus the web tools that keep projects moving.</p>
+          <ul class="stats" id="stats"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MISSIONS ============ -->
+    <section id="missions" class="section missions" data-blip="Missions">
+      <header class="section__head">
+        <p class="section__num">02</p>
+        <h2 class="section__title" data-split>Missions</h2>
+        <p class="section__sub">Live from Vercel. Every card is a deployed project — tap one for the briefing.</p>
+      </header>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter missions"></div>
+      <div class="missions__grid" id="missionGrid" aria-live="polite">
+        <div class="mission mission--skeleton"></div><div class="mission mission--skeleton"></div><div class="mission mission--skeleton"></div>
+      </div>
+    </section>
+
+    <!-- ============ ARSENAL ============ -->
+    <section id="arsenal" class="section arsenal" data-blip="Arsenal">
+      <header class="section__head">
+        <p class="section__num">03</p>
+        <h2 class="section__title" data-split>Weapon Wheel</h2>
+        <p class="section__sub">My toolkit. Hover, tap or use arrow keys to select.</p>
+      </header>
+      <div class="wheel">
+        <svg class="wheel__svg" id="wheel" viewBox="-200 -200 400 400" role="group" aria-label="Skills wheel"></svg>
+        <div class="wheel__center" aria-live="polite">
+          <p class="wheel__name" id="wheelName">—</p>
+          <div class="wheel__ammo"><i id="wheelAmmo"></i></div>
+          <p class="wheel__info" id="wheelInfo"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STORY ============ -->
+    <section id="story" class="section story" data-blip="Story">
+      <header class="section__head">
+        <p class="section__num">04</p>
+        <h2 class="section__title" data-split>Story Mode</h2>
+      </header>
+      <div class="story__viewport">
+        <ol class="story__track" id="storyTrack"></ol>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section contact" data-blip="Phone">
+      <header class="section__head">
+        <p class="section__num">05</p>
+        <h2 class="section__title" data-split>Pick up the phone</h2>
+        <p class="section__sub">Got a mission for me? Studio role, collab or game jam — send a text.</p>
+      </header>
+      <div class="contact__grid">
+        <div class="phone" id="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__screen">
+            <div class="phone__status"><span id="phoneClock">00:00</span><span>▮▮▮ 5G</span></div>
+            <div class="phone__apps" id="apps"></div>
+            <a class="phone__call btn btn--primary" id="callBtn" href="#"><span>✆ Call Atharv</span></a>
+          </div>
+        </div>
+        <form class="sms" id="sms" novalidate>
+          <div class="sms__thread">
+            <p class="bubble bubble--in">Yo. Heard you're looking for a game dev. 👀</p>
+            <p class="bubble bubble--in">Drop the details. I'll get back fast.</p>
+          </div>
+          <label class="field"><span>Your name</span><input name="name" required maxlength="80" autocomplete="name"></label>
+          <label class="field"><span>Message</span><textarea name="message" required maxlength="2000" rows="4"></textarea></label>
+          <p class="sms__err" id="smsErr" role="alert"></p>
+          <button class="btn btn--primary" type="submit" data-magnetic><span>Send text</span><kbd>➤</kbd></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__big" data-split>Mission complete</p>
+    <p class="footer__small">Built from scratch by Atharv Kashiv · <span id="year"></span> · An original fan-made tribute to open-world crime games, not affiliated with any studio.</p>
+    <a class="btn btn--ghost" href="#hero" data-magnetic><span>Replay ↑</span></a>
+  </footer>
+
+  <!-- briefing modal -->
+  <dialog class="brief" id="brief" aria-labelledby="briefTitle">
+    <div class="brief__art" id="briefArt"></div>
+    <div class="brief__body">
+      <p class="brief__label">MISSION BRIEFING</p>
+      <h3 id="briefTitle"></h3>
+      <p class="brief__desc" id="briefDesc"></p>
+      <ul class="brief__meta" id="briefMeta"></ul>
+      <div class="brief__ctas" id="briefCtas"></div>
+    </div>
+    <button class="brief__close" id="briefClose" aria-label="Close briefing">✕</button>
+  </dialog>
+
+  <div class="cheat" id="cheat" aria-live="assertive"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

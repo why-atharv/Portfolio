@@ -1,0 +1,9 @@
+{
+  "name": "atharv-kashiv-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "test": "node --test tests/projects.test.mjs"
+  }
+}
